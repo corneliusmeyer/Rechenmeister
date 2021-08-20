@@ -1,0 +1,94 @@
+* {
+    cursor: url("../img/cur220.cur"), auto;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    max-width: 4500px;
+    max-height: 3090px;
+    min-height: 500px;
+    background-image: url("../img/background.jpg");
+    background-repeat: no-repeat;
+    font-size: x-large;
+    zoom: 90%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0%; /* Entfernt die Scrollbalken */
+}
+
+header {
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+#logo {
+    margin-top: 20%;
+}
+
+.headline {
+    display: flex;
+    flex-direction: row;
+    margin: 1%;
+    text-decoration: none;
+}
+
+.description {
+    height: fit-content;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: orange;
+    /* https://www.w3schools.com/css/css3_shadows.asp */
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+h2 {
+    width: 100%;
+    border-style: outset;
+    padding-left: 1%;
+    padding-right: 1%;
+    width: fit-content;
+}
+
+.btn {
+    margin-top: 1.5%;
+    margin-left: 26%;
+    margin-right: 37%;
+    border-radius: 10px;
+    background-color: orange;
+    width: 50%;
+    color: black;
+    font-size: 90%;
+}
+
+.btn:active {
+    background-color: silver;
+}
+
+.btn:hover {
+    box-shadow: 10px 10px 5px rgb(221, 167, 96);
+}
+
+main {
+    margin: 2%;
+    border-style: double;
+    height: 70%;
+    clear: both;
+}
+
+@media screen and (max-width: 1000px) {
+    .headline {
+        display: none;
+    }
+}

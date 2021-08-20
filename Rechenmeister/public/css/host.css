@@ -1,0 +1,67 @@
+#setup {
+    display: grid;
+    grid-template-rows: auto 40% 10%; /*Y-Achse*/
+    grid-template-columns: auto 50%; /*X-Achse*/
+    grid-template-areas: "createSpieler spielerliste"
+                        "settings spielerliste"
+                        "btnStart spielerliste";
+    
+}
+
+h3 {
+    font-size: 150%;
+}
+
+input {
+    font-size: 80%;
+}
+
+select {
+    font-size: 80%;
+}
+
+label {
+    margin: 1%;
+}
+
+#createSpieler {
+    grid-area: createSpieler;
+    padding: 2%;
+}
+
+#settings {
+    grid-area: settings;
+}
+
+#spielerliste {
+    grid-area: spielerliste;
+    background-color: rgba(211, 211, 211, 0.519);
+    border: solid 2px;
+    height: 85%;
+    margin-top: 5%;
+    margin-left: 20%;
+    margin-right: 3%;
+    text-align: center;
+    border-radius: 10px;
+}
+
+hr {
+    border: solid 1px;
+    color: black;
+}
+
+fieldset {
+    grid-area: setting;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 15px;
+}
+
+legend {
+    font-style: italic;
+    font-size:xx-large;
+    text-shadow: 1px 1px 1px gray;
+    border-radius: 5px;
+}

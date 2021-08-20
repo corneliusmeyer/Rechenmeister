@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="DE">
+
+<head>
+    <meta charset="utf-8">
+    <title>Dokumentation</title>
+</head>
+
+<body style="margin-left: 30%; margin-right: 30%;">
+    <h1>Dokumenation</h1>
+    <article>
+        <h2>1. Beschreibung des Anwendungsszenarios</h2>
+        Dieses Projekt ist eine Webanwendung, welche sich mit dem Thema „Digitale Bildung“ beschäftigt.  
+        Das Grundkonzept besteht aus einem Kopfrechenspiel für Kinder. Die Zielgruppe sollen Grundschüler sein, weshalb auch ein Cowboy Design verwendet wird, um das Rechnen interessanter zu gestalten.
+        Der Lehrer, bzw. der Host hat die Möglichkeit, bis zu sechs Spieler hinzuzufügen und den Schwierigkeitsgrad festzulegen. 
+        Hierzu gibt der Spieler seinen Namen an und sucht sich eine Farbe aus. 
+        Anschließend kann das Spiel gestartet werden und die Spieler treten gegeneinander an.
+        Der Spielfortschritt kann über die Rangliste von Zuschauern und dem Host eingesehen werden.
+    </article>
+    <article>
+        <h2>2. Fachobjekte der Anwendung</h2>
+        Der Webanwendung liegen zwei Fachobjekte zu Grunde: Die <i>Spieler</i> und die <i>Aufgaben</i>.
+        <h3>Die Spieler</h3>
+        Die Spieler wurden mittels einer Hashmap realisiert. Hierzu wird die gewählte Spielerfabe als Key zu dem Spieler verwendet.
+        Ein Spielerobjekt besteht aus folgenden Attributen:
+        <ul>
+            <li>Die gewählte Spielerfabe</li>
+            <li>Der gewählte Spielername</li>
+            <li>Eine Statistikliste</li>
+            <li>Dem Index zu der aktuellen Aufgabe</li>
+        </ul>
+        Außerdem wurden folgende Methoden realisiert:
+        <table>
+            <thead>
+                <td>Methode</td>
+                <td>Beschreibung</td>
+            </thead>
+            <tr>
+                <td>naechsteAufgabe()</td>
+                <td>Hierbei wird der Aufgabenindex erhöht, sodass die nächste Aufgabe abgefragt wird</td>
+            </tr>
+            <tr>
+                <td>addStatistik()</td>
+                <td>Diese Methode bekommt einen Rückgabewert variierend, je nach dem, ob die aktuelle Aufgabe richtig gerechnet wurde</td>
+            </tr>
+            <tr>
+                <td>getRichtige()</td>
+                <td>Diese Methode liefert die Summe der richtig gerechneten Aufgaben aus der Statistikliste zurück</td>
+            </tr>
+        </table>
+        <h3>Die Aufgaben</h3>
+        <p>
+            Für die Erstellung einer Aufgabe werden zwei Parameter gefordert.
+            Zum einen der Operator der Rechnung und zum anderen <i>max</i>, welcher den Zahlenbereich des Ergebnisses einschränkt.
+        </p>
+        <p>
+            Die Klasse Zahl besitzt folgende Attribute:
+            <table>
+                <thead>
+                    <td>Attribut</td>
+                    <td>Beschreibung</td>
+                </thead>
+                <tr>
+                    <td>Zahl1</td>
+                    <td>Speichert die erste Zahl der Rechnung</td>
+                </tr>
+                <tr>
+                    <td>Zahl2</td>
+                    <td>Speichert die zweite Zahl der Rechnung</td>
+                </tr>
+                <tr>
+                    <td>Ergebnis</td>
+                    <td>Speichert das Ergebnis</td>
+                </tr>
+            </table>
+        </p>
+        <p>
+            Die Spieler, sowie die Aufgaben, werden von der Datenhaltung erzeugt und somit über eine Assoziation verbunden. 
+            Hierdurch wird auch gewährleistet, dass jeder Spieler dieselben Aufgaben bekommt 
+            und deshalb alle dieselben Voraussetzungen haben.
+        </p>
+    </article>
+    <article>
+        <header>
+            <h2>3. Beschreibung und Begründung der Implementierungsentscheidungen</h2>
+        </header>
+        <section>
+            <h3>3.1 Client</h3>
+            <section>
+                <h4>3.1.1 Strukturierung der HTML-Seiten</h4>
+                <p>
+                    Die Anwendung verfügt über vier wesentliche HTML Seiten, welche im Folgenden erläutert werden.
+                    Wird die Webanwendung aufgerufen, so gelangt der Benutzer auf den "Saloon" bzw. das Dashboard.
+                    Im Saloon werden die hinzugefügten Spieler gelistet und jeder Spieler kann durch Anklicken auf seine
+                    Rechenseite gelangen. Des Weiteren gibt es noch einen extra Slot, den Zuschauermodus. Dieser verweist auf die Rangliste.
+                    Wurde von dem Host noch kein Spieler hinzugefügt, so wird dies den Spielern mitgeteilt und der Host hat die Möglichkeit über einen
+                    Link auf die Host-Seite zu gelangen. Ansonsten kann nur über die Adresszeile, oder durch Klicken auf das Logo, auf die Host Seite zugegriffen werden. 
+                    Eine versteckte Navigierbarkeit zu der Host-Seite soll Unbefugten den Zugriff verhindern.
+                </p>
+                <p>
+                    Darunter befindet sich dann die Rechenseite jedes einzelnen Spielers, welche wie folgt aufgebaut ist:
+                    Der Spieler wird begrüßt, damit er sich auch sicher sein kann, dass er den richtigen Slot verwendet.
+                    Außerdem wird er darauf hingewiesen zu warten, bis das Spiel vom Host gestartet wird.
+                    Die Seite aktualisiert sich automatisch, damit niemand den Einstieg in das Spiel verpasst.
+                    Wurde das Spiel gestartet, so erscheint in einem Kästchen die Aufgabe mit einem Eingabefeld und einem Button zum Bestätigen.
+                    Tätigt der Spieler eine Zeit lang keine Eingabe, erscheint im unteren Bereich eine Wüstenrose, welche als kleines
+                    Gimmik gedacht ist und den Bildschirm durchläuft. Dieses soll andeuten, dass der Spieler schon lange überlegt.
+                    Die Seite des Hosts besteht aus zwei Eingabedialogen, einer Spielerliste und einem Knopf zum Starten des Spiels.
+                    Über den ersten Eingabedialog kann ein Spieler angelegt werden und über den zweiten werden die Einstellungen des Spiels festgelegt.
+                    Die Spielerliste zeigt die angelegten Spieler mit ihrer Farbe an und verfügt über eine Option, die Spieler wieder zu löschen.
+                    Auf der Seite der Rangliste wird lediglich eine Tabelle angezeigt, die den Fortschritt des Spiels, bzw. der einzelnen Spieler zeigt.
+                    Darüber hinaus gibt es noch die Seiten late, 404, rangliste-pure.
+                    Die Seite late erscheint, wenn versucht wird auf die Seite eines Spielers zuzugreifen, der nicht hinzugefügt wurde.
+                    Auf der Host-Seite wird nach Spielstart ein iFrame plaziert, welches <i>rangliste-pure</i> darstellt und somit
+                    dem Host ein komfortables Mitverfolgen ermöglicht.
+                    Die Seite 404 wird bei jeglichen fehlerhaften Anfragen angezeigt und leitet einen nach wenigen Sekunden zurück in den Saloon.
+                </p>
+            </section>
+            <section>
+                <h4>3.1.2 Layout</h4>
+                <p>
+                    Der Aubfau jeder Seite ist wie folgt:
+                    Oben links, in der Ecke, befindet sich die Überschrift mit einem Bild.
+                    Das Bild variiert, je nach Zustand der Seite. So wird zum Beispiel bei der 404 Seite ein 
+                    trauriger Smiley, statt eines glücklichen Smileys angezeigt.
+                    Außerdem gibt es noch einen Header, der auf der linken Seite einen Ort beschreibt und auf der rechten Seite eine Bezeichnung.
+                    Unter dem Header folgt anschließend der Hauptbereich. Dieser ist umrandet und beinhaltet jede individuelle Seite.
+                </p>
+                <p>
+                    Der Header besteht aus zwei Containern. Der erste Container ist für das Bild und die Überschrift verantwortlich
+                    und der zweite für den Seitennamen und die Beschreibung.
+                    Beide Container strukturieren die Elemente über die Flexbox.
+                </p>
+                <p>
+                    Auch in der Dashboard-Seite werden die Elemente mit einer Flexbox strukturiert, da die Spieler eine Art Liste von unterschiedlicher Länge sind.
+                    Auf der Seite des Hosts wird ein Grid verwendet, um die Eingabedialoge einheitlich zu positionieren und um
+                    die Spielerliste auf derselben Höhe zu halten.
+                </p>
+            </section>
+            <section>
+                <h4>3.1.3 Responsivität</h4>
+                <p>
+                    Bei dem Styling der Seiten wurde stets versucht, die Größenangaben relativ zu halten.
+                    Hierdurch soll gewährleistet werden, dass der Seitenaufbau trotz unterschiedlicher Skalierung gleichbleibend ist.
+                    Des Weiteren wurde  ein Breakpoint hinzugefügt, der auslöst, sobald die Breite den Wert 1000 unterschreitet.
+                    In dem Saloon werden hierdurch sowohl die Spielerslots, als auch deren Schrift, verkleinert.
+                    Außerdem wurde auf jeder Seite die Überschrift entfernt, da somit viel Platz eingespart wird und diese nicht von hoher Relevanz ist.
+                </p>
+            </section>
+        </section>
+        <section>
+            <h3>3.2 Server</h3>
+            <section>
+                <h4>3.2.1 Modulstruktur</h4>
+                <p>
+                    Das Herz der Webanwendung befindet sich in app.js.
+                    In dieser Datei wird der Server auf dem Port 8040 gestartet.
+                    Zudem wird dort die View Engine auf EJS, und der Views-Ordner gesetzt.
+                    Mittels EJS-Templates werden die Seiten dynamisch gehalten und Redundanzen vermieden.
+                    Der Header wurde zum Beispiel ausgelagert und wird von jeder Seite eingebunden.
+                    Um auf komfortables Routing zurückzugreifen, wurde hierbei express und der BodyParser eingebunden.
+                    Außerdem wird das Modul BodyParser verwendet, um die Anfragen besser auszuwerten.
+                    Das Routing wurde in die Datei routes.js ausgelagert und hierin eingebunden.
+                    Dort werden jegliche URL Anfragen behandelt und beantwortet.
+                    Zusätzlich kennt das Routing die Datenhaltung und bildet die Schnittstelle der An- und Abfragen.
+                </p>
+                <p>
+                    Als Datenhaltung dient data.js. In dieser sind sowohl die Aufgaben, als auch die Spieler gespeichert.
+                    Außerdem ist die Startvariable dort gespeichert, die darüber bestimmt, ob das Spiel läuft.
+                    Zudem wurden noch folgende Methoden implementiert:
+                    <table>
+                        <thead>
+                            <td>Methode</td>
+                            <td>Beschreibung</td>
+                        </thead>
+                        <tr>
+                            <td>getPlayerInfo(color)</td>
+                            <td>Liefert den Namen und den Aufgabenindex zu dem Spieler mit der übergebenen Farbe</td>
+                        </tr>
+                        <tr>
+                            <td>sortierteSpieler()</td>
+                            <td>Liefert ein Array mit sortierten Keys für die Rangliste</td>
+                        </tr>
+                        <tr>
+                            <td>loescheSpieler()</td>
+                            <td>Löscht alle existierenden Spieler</td>
+                        </tr>
+                        <tr>
+                            <td>getPlayerFortschritt(farbe)</td>
+                            <td>Liefert einen Text mit dem Fortschritt zu dem Spieler mit der angegebenen Farbe</td>
+                        </tr>
+                        <tr>
+                            <td>setzeAufgaben(anzahl, max, operator)</td>
+                            <td>Befüllt das Aufgabenarray zu den angegebenen Bedingungen</td>
+                        </tr>
+                        <tr>
+                            <td>createSpieler(name, farbe)</td>
+                            <td>Befüllt das Spielerarray mit einem Spieler nach den angegebenen Bedingungen</td>
+                        </tr>
+                        <tr>
+                            <td>spielerNaechsteAufgabe(farbe, value)</td>
+                            <td>Schreibt in die Statistik und der Aufgabenindex des Spielers wird erhöht.</td>
+                        </tr>
+                        <tr>
+                            <td>initialSatz()</td>
+                            <td>Diese Methode dient der Anforderung, einen initialen Datenbestand vorzuweisen</td>
+                        </tr>
+                    </table>
+                </p>
+            </section>
+            <section>
+                <h4>3.2.2 Unterstützte URLs/Endpunkte</h4>
+                Die Webanwendung verfügt über die Folgenden Endpunkte:
+                <table>
+                    <tr>
+                        <th>URL</th>
+                        <th>HTTP-Methode</th>
+                        <th>Aktion</th>
+                    </tr>
+                    <tr>
+                        <td>/</td>
+                        <td>GET</td>
+                        <td>Rendert das Dashboard</td>
+                    </tr>
+                    <tr>
+                        <td>/host | /admin</td>
+                        <td>GET</td>
+                        <td>Rendert die Hostseite</td>
+                    </tr>
+                    <tr>
+                        <td>/rangliste</td>
+                        <td>GET</td>
+                        <td>Rendert die Rangliste</td>
+                    </tr>
+                    <tr>
+                        <td>/$farbe</td>
+                        <td>GET</td>
+                        <td>Die Spielerseite der entsprechenden Farbe anzeigen</td>
+                    </tr>
+                    <tr>
+                        <td>/rangliste-pure</td>
+                        <td>GET</td>
+                        <td>Rendert die Rangliste ohne Layout-Verwendung</td>
+                    </tr>
+                    <tr>
+                        <td>/startGame</td>
+                        <td>POST</td>
+                        <td>Setzt die Startvariable auf true</td>
+                    </tr>
+                    <tr>
+                        <td>/stopGame</td>
+                        <td>POST</td>
+                        <td>Setzt die Startvariable auf false</td>
+                    </tr>
+                    <tr>
+                        <td>/spielerAnlegen</td>
+                        <td>POST</td>
+                        <td>Legt einen neuen Spieler an</td>
+                    </tr>
+                    <tr>
+                        <td>/spielerLoeschen</td>
+                        <td>POST</td>
+                        <td>Löscht alle hinzugefügten Spieler</td>
+                    </tr>
+                    <tr>
+                        <td>/btnWeiter</td>
+                        <td>POST</td>
+                        <td>Springt zur nächsten Aufgabe</td>
+                    </tr>
+                    <tr>
+                        <td>Falls kein Treffer</td>
+                        <td>GET/POST</td>
+                        <td>Anzeigen der 404-Seite</td>
+                    </tr>
+                </table>
+            </section>
+        </section>
+    </article>
+    <article>
+        <h2>4. Start der Anwendung</h2>
+        <p>
+            Um die Webanwendung zu starten wird die <i>app.js</i> Datei über node oder nodemon ausgeführt.
+            Anschließend lauscht der Server auf dem angegebenen Port und über die Adresse "http://localhost:8040" gelangt man nun auf
+            die Landing-Page. Man wird gebeten zu warten, bis der Host einen Spieler hinzugefügt hat.
+            Als Host hat man die Möglichkeit mittels eines Hyperlinks auf die Host Seite zu gelangen.
+            Dieses kann auch über die URL <i>/host</i> oder <i>/admin</i> geschehen oder durch Klicken auf das Logo.
+            Nachdem der Host nun mindestens einen, aber maximal sechs Spieler hinzugefügt und die Spielparameter festgelegt hat,
+            kann nun jeder seinen Spieler auf dem Dashboard auswählen und wartet dort, bis der Host das Spiel startet.
+            Anschließend wird gerechnet und der Host und Zuschauer können dabei das Spiel über die Rangliste mitverfolgen.
+        </p>
+    </article>
+    <article>
+        <h2>5. Autorenschaft der Quellcode-Dateien</h2>
+        <p>Dieses Projekt wurde von Cornelius Meyer (7206112) geschrieben.</p>
+    </article>
+</body>
+</html>

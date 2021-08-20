@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/favicon.ico"> 
+    <% if(!Aufgabe && started) { %>
+        <!-- https://stackoverflow.com/questions/3292038/redirect-website-after-certain-amount-of-time -->
+        <meta http-equiv="refresh" content="5;url=rangliste" /> 
+    <% } %>
+    <% if(!started) { %>
+        <meta http-equiv="refresh" content="1" /> 
+    <% } %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/player.css">
+    <title>Rechenmeister</title>
+</head>
+
+<body>
+    <% if(fortschritt && started) { %>
+        <%- include('./_header.ejs', {desc: fortschritt, ort: "Howdy " + name + "!", pic: ""})%>
+    <% } else { %>
+        <%- include('./_header.ejs', {desc: "Mach dich bereit!", ort: "Howdy " + name + "!", pic: ""})%>
+    <% } %>
+    <main>
+        <% if(started) { %>
+            <% if(Aufgabe) { %>
+                <fieldset id="eingabe">
+                    <% if(fortschritt) { %>
+                        <legend><%=fortschritt%></legend>
+                    <% } %>
+                    <%= Aufgabe.getZahlLinks()%> <%= Aufgabe.operator%> <%=Aufgabe.getZahlRechts()%> =  %>
+                    <form method="POST" action="btnWeiter">
+                        <input type="text" name="ergebnis" minlength="1" maxlength="10000" size="5" autofocus>
+                        <button class="btn">Weiter</button>
+                        <input type="hidden" name="url" value="<%=Farbe %>" />
+                    </form>
+                    </fieldset>
+            <% } else { %>
+                <p>Glückwunsch, du bist am Ende angekommen! Du wirst in 3 Sekunden auf die Rangliste weitergeleitet.</p>
+                <% } %>
+        <% } else { %>
+            <p>Das Spiel beginnt in kürze...</p>
+        <% } %>
+    </main>
+    <script src="js/timeout.js"></script>
+</body>
+
+</html>
