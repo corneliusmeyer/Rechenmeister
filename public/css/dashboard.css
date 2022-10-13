@@ -1,0 +1,53 @@
+main {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    width: 250px;
+    height: 237px;
+    margin: 10px;
+    margin-top: 5%;
+    background-color: peru;
+    color: black;
+    border: 2px solid;
+    border-color: black;
+    border-radius: 5px;
+}
+
+.playername {
+    text-align: center;
+    font-size: larger;
+    font-style: italic;
+}
+
+.btn:hover {
+    width: 262px;
+    height: 248px;
+    box-shadow: 10px 10px 5px rgb(221, 167, 96);
+    transition: 0.2s;
+}
+
+.spielerbild {
+  position: relative;
+  overflow: hidden;
+}
+
+.playerselect > img {
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+    .btn {
+        width: 160px;
+        height: 150px;
+        margin: 8px;
+        font-size: 80%;
+    }
+}

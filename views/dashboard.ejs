@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+    <title>Rechenmeister</title>
+</head>
+
+<body>
+    <%- include('./_header.ejs', {desc: "Wähle deinen Spieler", ort: "Saloon", pic: ""})%>
+
+    <main>
+        <% if(Spielerliste && Object.keys(Spielerliste).length > 0) { %>
+            <% for(var farbe in Spielerliste) { %>
+                <div class="playerselect">
+                    <a class="btn" href="<%=farbe %>">
+                        <img src="/img/cb_player.png"  width="210" height="145" style="background-color: <%=farbe%>;" class="spielerbild" alt="Spielerbild">
+                    </a>
+                    <div class="playername">
+                        <%=Spielerliste[farbe].name%>
+                    </div>
+                </div>
+            <% } %>
+            <div class="playerselect">
+                <a class="btn" style="background-color: silver" href="rangliste">Zuschauer</a>
+            </div>
+        <% } else { %>
+            <p>Der Host hat noch keine Spieler hinzugefügt.
+            Hab bitte etwas Gedult.
+            Solltest du der Admin sein, kannst du <a href="host" target="_blank">hier</a> ein Spiel hosten.
+            </p>
+        <% } %>
+    </main>
+    <footer>
+    </footer>
+</body>
+
+</html>

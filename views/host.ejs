@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rechenmeister</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/host.css">
+    <link rel="icon" href="img/favicon.ico">
+</head>
+
+<body>
+    <%- include('./_header.ejs', {desc: "Spiel hosten", ort: "Sheriff´s Office", pic: "sheriff.png"})%>
+        <% if(!start) { %>
+            <main id="setup">
+            <div id="spielerliste">
+                <h3>Spielerliste</h3>
+                <hr>
+                <% if(Spielerliste && Object.keys(Spielerliste).length > 0) { %>
+                    <% for(var key in Spielerliste) { %>
+                        <p id="<%=key%>" style="background-color: <%=key%>; border-radius: 50px; margin-left: 20%; margin-right: 20%">
+                            <%=Spielerliste[key].name%>
+                        </p>
+                    <% } %> 
+                    <form method="POST" action="spielerLoeschen">
+                        <button class="btn">Alle Spieler löschen</button>
+                    </form>
+                <% } %>
+            </div>
+            <form method="POST" action="spielerAnlegen" id="spielerAnlegen">
+                <fieldset id="createSpieler">
+                    <legend>Spieler erstellen</legend>
+                    <label>Name:</label>
+                        <input type="text" name="name" required minlength="1" maxlength="12" size="12" placeholder="Max Mustermann">
+                        <% if(Farben) { %>
+                            <label for="farbAuswahl">Farbe auswählen:</label>
+                            <select id="farbAuswahl" name="farbe">
+                                <option value="<%= Farben[0].substring(1) %>">Rot</option>
+                                <option value="<%= Farben[1].substring(1) %>">Grün</option>
+                                <option value="<%= Farben[2].substring(1) %>">Blau</option>
+                                <option value="<%= Farben[3].substring(1) %>">Orange</option>
+                                <option value="<%= Farben[4].substring(1) %>">Gelb</option>
+                                <option value="<%= Farben[5].substring(1) %>">Pink</option>
+                            </select>
+                            <button class="btn">Spieler hinzufügen</button>  
+                        <% } %>
+                </fieldset>
+            </form>
+       
+            <form method="POST" action="startGame">
+                <fieldset id="settings">
+                    <legend>Einstellungen</legend>
+                    <label>Operator:</label>
+                    <select name="operator">
+                        <option value="+">Addition</option>
+                        <option value="-">Substraktion</option>
+                        <option value="*">Multiplikation</option>
+                        <option value="/">Division</option>
+                    </select>
+
+                    <label>Wertebereich auswählen:</label>
+                    <select name="max">
+                        <option value="10">10</option>
+                        <option value="50" selected>50</option>
+                        <option value="100">100</option>
+                        <option value="1000">1000</option>
+                        <option value="10000">10000</option>
+                        <option value="1000000">1000000</option>
+                    </select>
+
+                    <label>Anzahl Aufgaben:</label>
+                    <select name="anzahl">
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                    </select>
+
+                </fieldset>
+                <button class="btn" id="btnStart">Spiel starten</button>
+            </form>
+        </main>
+        <% } else { %>
+        <main>
+            <p>Das Spiel läuft. Hier kannst du den Fortschritt mitverfolgen:</p>
+            <iframe src="rangliste-pure" width="1000" height="450" name="rangliste"></iframe>
+            <form method="POST" action="stopGame">
+                <button class="btn">Spiel beenden</button>
+            </form>
+        </main>
+    <% } %>
+    <script src="js/check.js"></script>
+</body>
+
+</html>

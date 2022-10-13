@@ -1,0 +1,17 @@
+<header>
+    <a class="headline" href="host" target="_blank">
+        <figure>
+            <% if(pic) { %>
+                <img src="img/<%=pic%>" width="60" height="60" id="logo" alt="Bild">
+            <% } else { %>
+                <img src="img/cb.png" width="60" height="60" id="logo" alt="Bild">
+            <% } %>
+        </figure>
+        <h1>Rechenmeister</h1>
+    </a>
+    <div class="description">
+        <!-- Ort und desc wurden vertauscht, somit ist ort=desc und desc=ort!-->
+        <h2><%= ort %></h2>
+        <h2><%= desc %></h2>
+    </div>
+</header>
